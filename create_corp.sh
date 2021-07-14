@@ -57,10 +57,12 @@ $segmenter/factored-segmenter encode  --model enfr.fsm < corp.pre.en-fr.fr.cln >
 $segmenter/factored-segmenter encode  --model enfr.fsm < corp+paracrawl.pre.en-fr.en.cln > corp+paracrawl.pre.en-fr.en.fs
 $segmenter/factored-segmenter encode  --model enfr.fsm < corp+paracrawl.pre.en-fr.fr.cln > corp+paracrawl.pre.en-fr.fr.fs
 
+# download dev sets and eval scripts
+git clone https://github.com/mahfuzibnalam/terminology_evaluation
 
-
-# lemmatize target sides
+# lemmatize target sides (this will take a long time)
 
 bash lemm_all.sh
 bash lemm_all_para.sh
+
 
