@@ -2,7 +2,27 @@
 set -ex
 
 segmenter=/home/big_maggie/usr/nmt_scripts/factored-segmenter/bin/Release/netcoreapp3.1/linux-x64/publish/
-gizp -d en-fr.txt.gz #paracrawl
+
+#download
+
+#paracrawl
+wget https://s3.amazonaws.com/web-language-models/paracrawl/release7.1/en-fr.txt.gz
+
+wget http://data.statmt.org/news-commentary/v16/training/news-commentary-v16.en-fr.tsv.gz
+
+wget http://statmt.org/wmt13/training-parallel-commoncrawl.tgz
+
+wget http://statmt.org/wmt10/training-giga-fren.tar
+
+wget http://www.statmt.org/europarl/v10/training/europarl-v10.fr-en.tsv.gz
+
+#UN has to be downloaded manually from: https://conferences.unite.un.org/UNCORPUS/en/DownloadOverview
+
+gzip -d en-fr.txt.gz #paracrawl
+gzip -d news-commentary-v16.en-fr.tsv.gz
+gzip -d europarl-v10.fr-en.tsv.gz
+
+tar -xf training-giga-fren.tar
 
 cut -f1 europarl-v10.fr-en.tsv > europarl-v10.fr-en.fr
 cut -f2 europarl-v10.fr-en.tsv > europarl-v10.fr-en.en
@@ -40,6 +60,7 @@ $segmenter/factored-segmenter encode  --model enfr.fsm < corp+paracrawl.pre.en-f
 
 
 # lemmatize target sides
+
 bash lemm_all.sh
 bash lemm_all_para.sh
 
